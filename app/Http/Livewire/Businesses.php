@@ -9,7 +9,8 @@ class Businesses extends Component
 {
     public $businesses, $control_number, $name, $first_name, $middle_name, $last_name, 
         $building, $purok, $barangay, $ownership, $status, $employees_male,
-        $employees_female, $lines_of_business, $daily, $annual, $amount;
+        $employees_female, $amount, $daily_or_annual, $account_number, $products_services, $included_products,
+        $floor, $stall_number, $waypoint, $image_count, $date_established, $gross_sales, $interviewee, $date_interviewed, $description;
 
     public $isOpen = 0;
 
@@ -49,10 +50,20 @@ class Businesses extends Component
         $this->ownership = '';
         $this->employees_male = '';
         $this->employees_female = '';
-        $this->lines_of_business = '';
-        $this->daily = '';        
-        $this->annual = '';    
+        $this->products_services = [];
+        $this->daily_or_annual = '';        
+        $this->account_number = '';    
+        $this->included_products = [];          
         $this->amount = '';           
+        $this->floor = '';
+        $this->stall_number = '';
+        $this->waypoint = '';
+        $this->image_count = '';        
+        $this->date_established = '';    
+        $this->gross_sales = '';          
+        $this->interviewee = '';           
+        $this->date_interviewed = '';    
+        $this->description = '';        
         $this->business_id = '';        
     }
 
@@ -79,10 +90,20 @@ class Businesses extends Component
             'status' => $this->status,
             'employees_male' => $this->employees_male,
             'employees_female' => $this->employees_female,     
-            'lines_of_business' => $this->lines_of_business,
-            'daily' => $this->daily,
-            'annual' => $this->annual,                                                   
-            'amount' => $this->amount,                
+            'account_number' => $this->account_number,
+            'products_services' => json_encode($this->products_services),
+            'included_products' => json_encode($this->included_products),  
+            'daily_or_annual' => $this->daily_or_annual,                                                             
+            'amount' => $this->amount,     
+            'floor' => $this->floor,
+            'stall_number' => $this->stall_number,     
+            'waypoint' => $this->waypoint,
+            'image_count' => $this->image_count,
+            'date_established' => $this->date_established,  
+            'gross_sales' => $this->gross_sales,                                                             
+            'interviewee' => $this->interviewee,    
+            'date_interviewed' => $this->date_interviewed,
+            'description' => $this->description,            
         ]);
 
         session()->flash('message', 
@@ -110,10 +131,22 @@ class Businesses extends Component
         $this->status =  $business->status;
         $this->employees_male =  $business->employees_male;
         $this->employees_female =  $business->employees_female;
-        $this->lines_of_business =  $business->lines_of_business;
-        $this->daily =  $business->daily;        
-        $this->annual =  $business->annual;    
-        $this->amount =  $business->amount;              
+        $this->products_services =  json_decode($business->products_services, true); 
+        $this->account_number =  $business->account_number;        
+        $this->daily_or_annual =  $business->daily_or_annual;        
+        $this->included_products =  json_decode($business->included_products, true);    
+        $this->amount =  $business->amount;           
+
+        $this->floor =  $business->floor;
+        $this->stall_number =  $business->stall_number;
+        $this->waypoint =  $business->waypoint;
+        $this->image_count =  $business->image_count;
+        $this->date_established =  $business->date_established;        
+        $this->gross_sales =  $business->gross_sales;        
+        $this->interviewee =  $business->interviewee;    
+        $this->date_interviewed =  $business->date_interviewed;       
+        $this->description =  $business->description;           
+
         $this->openModal();
     }
 

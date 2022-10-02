@@ -62,10 +62,11 @@
                         <td class="border px-4 py-2">{{ $business->status }} </td>          
                         <td class="border px-4 py-2">{{ $business->employees_male }} </td>
                         <td class="border px-4 py-2">{{ $business->employees_female }} </td>            
-                        <td class="border px-4 py-2">{{ $business->lines_of_business }} </td>          
-                        <td class="border px-4 py-2">{{ $business->daily  ? '✅' : '🔲' }} </td>
-                        <td class="border px-4 py-2">{{ $business->annual ? '✅' : '🔲' }} </td>                                                         
+                        <td class="border px-4 py-2">{{ implode(', ', json_decode($business->products_services)) }} </td>      
                         <td class="border px-4 py-2">{{ $business->amount }} </td>                              
+                        <td class="border px-4 py-2">{{ $business->daily_or_annual == 'daily' ? '✅' : '🔲' }} </td>
+                        <td class="border px-4 py-2">{{ $business->daily_or_annual == 'annual' ? '✅' : '🔲' }} </td>                                                         
+                            
                         <td class="border px-1 py-2 text-center">
                             <button wire:click="edit({{ $business->id }})" class="w-full bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded mb-1">Edit</button>
                             <button wire:click="delete({{ $business->id }})" class="w-full bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded mb-1">Delete</button>
