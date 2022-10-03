@@ -16,7 +16,7 @@ class Businesses extends Component
 
     public function render()
     {
-        $this->businesses = Business::all();
+        $this->businesses = Business::orderBy('created_at', 'desc')->get();
         return view('livewire.businesses.index');
 
     }
@@ -71,10 +71,6 @@ class Businesses extends Component
     {
         $this->validate([
             'control_number' => 'required',
-            'name' => 'required',
-            'first_name' => 'required',
-            'middle_name' => 'required',
-            'last_name' => 'required',
         ]);
 
         Business::updateOrCreate(['id' => $this->business_id], [
@@ -88,21 +84,21 @@ class Businesses extends Component
             'ownership' => $this->ownership,            
             'barangay' => $this->barangay,     
             'status' => $this->status,
-            'employees_male' => $this->employees_male,
-            'employees_female' => $this->employees_female,     
+            'employees_male' => (int) $this->employees_male,
+            'employees_female' => (int) $this->employees_female,     
             'account_number' => $this->account_number,
             'products_services' => json_encode($this->products_services),
             'included_products' => json_encode($this->included_products),  
             'daily_or_annual' => $this->daily_or_annual,                                                             
-            'amount' => $this->amount,     
+            'amount' =>  (int) $this->amount ?? 0,     
             'floor' => $this->floor,
             'stall_number' => $this->stall_number,     
             'waypoint' => $this->waypoint,
-            'image_count' => $this->image_count,
-            'date_established' => $this->date_established,  
-            'gross_sales' => $this->gross_sales,                                                             
+            'image_count' =>  (int) $this->image_count,
+            'date_established' => empty($this->date_established) ? null : $this->date_established,  
+            'gross_sales' => (int) $this->gross_sales,                                                             
             'interviewee' => $this->interviewee,    
-            'date_interviewed' => $this->date_interviewed,
+            'date_interviewed' => empty($this->date_interviewed) ? null : $this->date_interviewed,
             'description' => $this->description,            
         ]);
 
@@ -135,7 +131,7 @@ class Businesses extends Component
         $this->account_number =  $business->account_number;        
         $this->daily_or_annual =  $business->daily_or_annual;        
         $this->included_products =  json_decode($business->included_products, true);    
-        $this->amount =  $business->amount;           
+        $this->amount =  $business->amount ?? 0;           
 
         $this->floor =  $business->floor;
         $this->stall_number =  $business->stall_number;

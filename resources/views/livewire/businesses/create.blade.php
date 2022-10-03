@@ -115,8 +115,10 @@
                     <x-jet-label for="status" value="{{ __('Status') }}" />
                     <select id="status" class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" name="status" wire:model="status">
                       <option value=""></option>
+                      <option value="NR">Newly Register</option>
                       <option value="REG">Register</option>
                       <option value="NBP">No Business Permit</option>
+                      <option value="NBP">No Business Permit</option>                      
                       <option value="CLS">Closed</option>
                     </select>
                     @error('status') <span class="text-red-500">{{ $message }}</span>@enderror                             

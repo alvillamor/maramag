@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('businesses', function (Blueprint $table) {
             $table->id();
-            $table->string('account_number', 100);               
+            $table->string('account_number', 100)->nullable();              
             $table->string('control_number', 100);            
-            $table->string('name', 100);
-            $table->string('first_name', 100);
-            $table->string('middle_name', 100);            
-            $table->string('last_name', 100);          
+            $table->string('name', 100)->nullable(); 
+            $table->string('first_name', 100)->nullable(); 
+            $table->string('middle_name', 100)->nullable();            
+            $table->string('last_name', 100)->nullable();          
             $table->text('building')->nullable(); 
             $table->string('purok', 100)->nullable(); 
             $table->text('barangay')->nullable();   
